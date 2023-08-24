@@ -10,6 +10,7 @@ public class SolutionTest {
         String[] strs1 = {"flower","flow","flight"};
         assertEquals("fl",  Solution.longestCommonPrefix(strs1));
 
+
         String[] strs2 = {"dog","racecar","car"};
         assertEquals("",  Solution.longestCommonPrefix(strs2));
     }
