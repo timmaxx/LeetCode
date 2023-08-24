@@ -1,7 +1,10 @@
 package com.leetcode.t0003_RomanToInteger;
 
-// 13. Roman to Integer
-/*
+/* 13. Roman to Integer
+Easy
+11.9K
+689
+Companies
 Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M.
 
 Symbol       Value
@@ -37,7 +40,6 @@ Input: s = "MCMXCIV"
 Output: 1994
 Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
 
-
 Constraints:
 1 <= s.length <= 15
 s contains only the characters ('I', 'V', 'X', 'L', 'C', 'D', 'M').
@@ -46,6 +48,56 @@ It is guaranteed that s is a valid roman numeral in the range [1, 3999].
 
 public class Solution {
     public static int romanToInt(String roman) {
-        return 0;
+        int result = 0;
+        int prev = 10000;
+
+        for (int i = 0; i < roman.length(); i++) {
+            char ch = roman.charAt(i);
+            if (ch == 'M') {
+                result += 1000;
+                if (prev < 1000) {
+                    result -= 200;
+                }
+                prev = 1000;
+            } else if (ch == 'D') {
+                result += 500;
+                if (prev < 500) {
+                    result -= 200;
+                }
+                prev = 500;
+            } else if (ch == 'C') {
+                result += 100;
+                if (prev < 100) {
+                    result -= 20;
+                }
+                prev = 100;
+            } else if (ch == 'L') {
+                result += 50;
+                if (prev < 50) {
+                    result -= 20;
+                }
+                prev = 50;
+            } else if (ch == 'X') {
+                result += 10;
+                if (prev < 10) {
+                    result -= 2;
+                }
+                prev = 10;
+            } else if (ch == 'V') {
+                result += 5;
+                if (prev < 5) {
+                    result -= 2;
+                }
+                prev = 5;
+            } else {
+                result += 1;
+                prev = 1;
+            }
+            //System.out.println(ch);
+            //System.out.println(result);
+        }
+        //System.out.println();
+
+        return result;
     }
 }
