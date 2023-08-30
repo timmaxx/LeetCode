@@ -4,27 +4,26 @@ public class Solution {
     public static int[] maxSlidingWindow(int[] nums, int k) {
         int lengthOfWindow = nums.length - k + 1;
         int[] arrOfMax = new int[lengthOfWindow];
-        int countOfMax = 1;
+        int countOfMax = 1; // Счетчик одинаковых максимумов в окне
 
         for (int i = 0; i < lengthOfWindow; i++) {
             int max = nums[i];
             boolean bruteForce = i == 0; // Для нулевого окна
 
             if (!bruteForce) {
-                if (nums[i + k - 1] > arrOfMax[i - 1]) {// Если прибывший (т.е. справа) больше максимального в предыдущем окне
-                    countOfMax = 1;
+                if (nums[i + k - 1] >= arrOfMax[i - 1]) { // Если прибывший (т.е. справа) больше или равен максимального в предыдущем окне
                     arrOfMax[i] = nums[i + k - 1];
+                    if (nums[i + k - 1] > arrOfMax[i - 1]) {
+                        countOfMax = 1;
+                    } else {
+                        countOfMax++;
+                    }
                     continue;
-                } else if (nums[i + k - 1] == arrOfMax[i - 1]) {
-                    countOfMax++;
-                    arrOfMax[i] = nums[i + k - 1];
-                    continue; // bruteForce = false;
                 }
             }
 
             if (!bruteForce) {
                 if (nums[i - 1] == arrOfMax[i - 1]) { // Если выбывший (т.е. слева) один из максимального в предыдущем окне
-                    // Уменьшаем счетчик максимальных
                     countOfMax--;
                 }
             }
